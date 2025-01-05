@@ -57,7 +57,7 @@ function App() {
         </div>
         <div className="YourCart">
           <h4>Your Cart ({getSum()})</h4>
-          {getSum()===0 && <img src="./src/assets/img/Empty-Placeholder.png" className="emptyPlaceholder" />}
+          {getSum()===0 && <img src="./img/Empty-Placeholder.png" className="emptyPlaceholder" />}
             
           
           {cart.length > 0 && (
@@ -99,7 +99,7 @@ function Card({ id, name, price, category, img, addToCart, deleteToCart, cart })
           </>
         ) : (
           <button onClick={() => addToCart(id)} className="add-to-cart-btn">
-            <img src="./src/assets/img/shopping-cart-plus.png" />
+            <img src="./img/shopping-cart-plus.png" />
             Add to Cart
           </button>
         )}
