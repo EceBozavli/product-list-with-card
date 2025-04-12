@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import product from './data';
 import './App.css';
 
 function App() {
   const [products, setProducts] = useState(product);
   const [cart, setCart] = useState([]);
+  const [isStart, setIsStart] = useState(false);
+  const dialogRef = useRef(null);
 
   function addCart(id) {
     const productItem = products.find(x => x.id === id);
@@ -34,6 +36,15 @@ function App() {
     return cart.reduce((total, item) => total + item.count, 0);
   }
 
+  function handleClick() {
+    dialogRef.current.showModal();
+  }
+  function handleStart() {
+    dialogRef.current.close();
+    setIsStart(true);
+    setCart([]);
+
+  }
   return (
     <div className="container">
       <div className="header">
@@ -55,11 +66,15 @@ function App() {
             />
           ))}
         </div>
+
         <div className="YourCart">
-          <h4>Your Cart ({getSum()})</h4>
-          {getSum()===0 && <img src="./img/Empty-Placeholder.png" className="emptyPlaceholder" />}
-            
-          
+          {isStart && (
+            <>
+            <h4>Your Cart ({getSum()})</h4>
+            {getSum() === 0 && <img src="./img/Empty-Placeholder.png" className="emptyPlaceholder" />}
+            </>
+          )}
+
           {cart.length > 0 && (
             <>
               {cart.map((item) => (
@@ -76,6 +91,12 @@ function App() {
                 <p>Order Total</p>
                 <h4>${getTotal()} </h4>
               </div>
+              <img src="./img/Info.svg" className='info' />
+              <button className='confirmBtn' onClick={handleClick} >Confirm Order</button>
+              <dialog ref={dialogRef} >
+                <img src="./img/confirmed.svg" />
+                <button className='startBtn' onClick={handleStart} >Start New Order</button>
+              </dialog>
             </>
           )}
         </div>

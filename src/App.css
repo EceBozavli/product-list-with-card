@@ -1,6 +1,7 @@
-
 /* 1. Use a more-intuitive box-sizing model */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -17,18 +18,31 @@ body {
 }
 
 /* 5. Improve media defaults */
-img, picture, video, canvas, svg {
+img,
+picture,
+video,
+canvas,
+svg {
   display: block;
   max-width: 100%;
 }
 
 /* 6. Inherit fonts for form controls */
-input, button, textarea, select {
+input,
+button,
+textarea,
+select {
   font: inherit;
 }
 
 /* 7. Avoid text overflows */
-p, h1, h2, h3, h4, h5, h6 {
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   overflow-wrap: break-word;
 }
 
@@ -36,23 +50,33 @@ p, h1, h2, h3, h4, h5, h6 {
 p {
   text-wrap: pretty;
 }
-h1, h2, h3, h4, h5, h6 {
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   text-wrap: balance;
 }
 
 /*
   9. Create a root stacking context
 */
-#root, #__next {
+#root,
+#__next {
   isolation: isolate;
 }
 
 .container {
+  display: block;
+  margin-inline: auto;
   background-color: #FCF8F6;
   max-width: 375px;
   font-family: 'Red Hat Text';
-  padding: 24px; 
+  padding: 24px;
 }
+
 h1 {
   color: #260F08;
   font-size: xx-large;
@@ -60,6 +84,7 @@ h1 {
   line-height: 48px;
   margin-bottom: 32px;
 }
+
 .btnGroup {
   padding-block: 12.5px;
   background-color: #C73B0F;
@@ -70,15 +95,16 @@ h1 {
   margin-bottom: 16px;
   background-color: #fff;
   margin-inline: auto;
-  margin-top: -10px; 
+  margin-top: -10px;
   width: Fixed (160px)px;
   height: Hug (44px)px;
   max-width: 160px;
   padding: var(--spacing150);
   gap: var(--spacing100);
   border-radius: 999px;
-  border: 1px solid var(--color-rose-400, #AD8A85) 
+  border: 1px solid var(--color-rose-400, #AD8A85)
 }
+
 .btnGroup.active {
   background-color: #C73B0F;
   color: #fff;
@@ -90,8 +116,9 @@ h1 {
   display: flex;
   gap: 8px;
   padding-left: 28px;
-  
+
 }
+
 .YourCart {
   font-size: var(--font-sizetext-preset-2);
   font-weight: 700;
@@ -101,6 +128,7 @@ h1 {
   background-color: #fff;
   padding: 24px;
   border-radius: 12px;
+
   h4 {
     font-size: x-large;
     font-weight: 700;
@@ -110,9 +138,44 @@ h1 {
     text-decoration-skip-ink: none;
     color: #C73B0F;
   }
+
+  .info {
+    margin-block: 24px;
+  }
+
+  .confirmBtn {
+    width: 279px;
+    height: 53px;
+    border-radius: 999px;
+    border-color: transparent;
+    background-color: #C73B0F;
+    color: #fff;
+  }
+
+  .emptyPlaceholder {
+    display: block;
+    margin-inline: auto;
+  }
 }
+
+dialog {
+  margin: auto;
+  padding: 24px;
+  border-radius: 12px;
+  border-color: transparent;
+
+  button {
+    margin-top: 32px;
+    width: 327px;
+    height: 53px;
+    border-radius: 999px;
+    border-color: transparent;
+    background-color: #C73B0F;
+    color: #fff;
+  }
+}
+
 .card {
-  
   p {
     font-size: var(--font-sizetext-preset-4);
     font-weight: 400;
@@ -120,6 +183,7 @@ h1 {
     color: #87635A;
     margin-bottom: 4px;
   }
+
   h6 {
     font-size: var(--spacing200);
     font-weight: 600;
@@ -127,18 +191,22 @@ h1 {
     color: #260F08;
     margin-bottom: 4px;
   }
+
   span {
     font-size: var(--spacing200);
     font-weight: 600;
     line-height: 21.17px;
   }
 }
+
 .cards {
   display: grid;
   grid-template-columns: 1fr;
   gap: 24px;
 }
-.dec, .inc {
+
+.dec,
+.inc {
   border: white;
   border-radius: 50px;
   background-color: transparent;
@@ -150,6 +218,7 @@ h1 {
   font-weight: 600;
   line-height: 18.52px;
   font-size: var(--font-sizetext-preset-4);
+
   h2 {
     font-size: small;
     color: #260F08;
@@ -157,34 +226,42 @@ h1 {
     margin-bottom: 8px;
   }
 }
+
 .dessertAmount {
   display: flex;
   gap: 8px;
   border-bottom: 1px solid #F5EEEC;
   padding-bottom: 16px;
 }
+
 .cc {
   color: #C73B0F;
 }
-.cp, .ct {
+
+.cp,
+.ct {
   font-weight: 400;
   color: #87635A
 }
+
 .emptyPlaceholder {
   margin-top: 24px;
 }
-.orderTotal { 
+
+.orderTotal {
   display: flex;
   justify-content: space-between;
-  p{
-  font-size: var(--font-sizetext-preset-4);
-  font-weight: 400;
-  line-height: 18.52px;
-  text-align: left;
-  text-underline-position: from-font;
-  text-decoration-skip-ink: none;
-  color: #260F08;
-  }  
+
+  p {
+    font-size: var(--font-sizetext-preset-4);
+    font-weight: 400;
+    line-height: 18.52px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #260F08;
+  }
+
   h4 {
     font-size: x-large;
     font-weight: 700;
@@ -197,36 +274,48 @@ h1 {
   }
 }
 
-@media(width >= 768px) {
+@media(width >=768px) {
   .container {
     max-width: 768px;
     padding: 40px;
   }
+
   .cards {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px 32px;
   }
+
   .YourCart {
     margin-top: 56px;
+
+    .confirmBtn {
+      width: 640px;
+    }
   }
+
 }
 
-@media(width >= 1440px) {
+@media(width >=1440px) {
   .container {
     max-width: 1440px;
     padding: 88px 112px;
   }
+
   .hero {
     display: flex;
     gap: 32px;
   }
+
   .Card img {
     width: 250.67px;
   }
+
   .YourCart {
     margin-top: -85px;
     width: 384px;
-    height: 542px;
+    .confirmBtn {
+      width: 336px;
+    }
   }
 }
