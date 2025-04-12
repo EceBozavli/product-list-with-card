@@ -5,7 +5,7 @@ import './App.css';
 function App() {
   const [products, setProducts] = useState(product);
   const [cart, setCart] = useState([]);
-  const [isStart, setIsStart] = useState(false);
+  const [isStart, setIsStart] = useState(true); // Changed to true to show cart initially
   const dialogRef = useRef(null);
 
   function addCart(id) {
@@ -18,20 +18,22 @@ function App() {
       setCart([...cart, { ...productItem, count: 1 }])
     }
   }
+  
   function deleteToCart(id) {
-
-    if (cart.find((x) => x.count > 1)) {
+    if (cart.find((x) => x.id === id && x.count > 1)) {
       cart.find(x => x.id === id).count--;
       setCart([...cart]);
     } else {
-      setCart(cart.filter(x => x.id != id));
+      setCart(cart.filter(x => x.id !== id)); // Fixed comparison operator
     }
   }
+  
   function getTotal() {
     let total = 0;
     cart.map((x) => total += x.count * x.price)
     return total;
   }
+  
   function getSum() {
     return cart.reduce((total, item) => total + item.count, 0);
   }
@@ -39,12 +41,13 @@ function App() {
   function handleClick() {
     dialogRef.current.showModal();
   }
+  
   function handleStart() {
     dialogRef.current.close();
     setIsStart(true);
     setCart([]);
-
   }
+  
   return (
     <div className="container">
       <div className="header">
@@ -68,17 +71,14 @@ function App() {
         </div>
 
         <div className="YourCart">
-          {isStart && (
-            <>
-            <h4>Your Cart ({getSum()})</h4>
-            {getSum() === 0 && <img src="./img/Empty-Placeholder.png" className="emptyPlaceholder" />}
-            </>
-          )}
+          {/* Always show the cart header and empty placeholder */}
+          <h4>Your Cart ({getSum()})</h4>
+          {getSum() === 0 && <img src="./img/Empty-Placeholder.png" className="emptyPlaceholder" />}
 
           {cart.length > 0 && (
             <>
               {cart.map((item) => (
-                <div className="cartItem">
+                <div className="cartItem" key={item.id}>
                   <h2>{item.name}</h2>
                   <div className="dessertAmount">
                     <span className='cc'>{item.count}x</span>
@@ -92,10 +92,10 @@ function App() {
                 <h4>${getTotal()} </h4>
               </div>
               <img src="./img/Info.svg" className='info' />
-              <button className='confirmBtn' onClick={handleClick} >Confirm Order</button>
-              <dialog ref={dialogRef} >
+              <button className='confirmBtn' onClick={handleClick}>Confirm Order</button>
+              <dialog ref={dialogRef}>
                 <img src="./img/confirmed.svg" />
-                <button className='startBtn' onClick={handleStart} >Start New Order</button>
+                <button className='startBtn' onClick={handleStart}>Start New Order</button>
               </dialog>
             </>
           )}
@@ -104,23 +104,23 @@ function App() {
     </div>
   );
 }
-// Card Bileşeni
-function Card({ id, name, price, category, img, addToCart, deleteToCart, cart }) {
 
+// Card Component
+function Card({ id, name, price, category, img, addToCart, deleteToCart, cart }) {
   let isInCart = cart.find((x) => x.id === id);
   return (
     <div className="card">
       <img src={img} alt={name} />
-      <div className={`btnGroup ${isInCart && "active"}`} >
+      <div className={`btnGroup ${isInCart && "active"}`}>
         {isInCart ? (
           <>
-            <button className="dec" onClick={() => deleteToCart(id)} >-</button>
+            <button className="dec" onClick={() => deleteToCart(id)}>-</button>
             <span>{isInCart.count}</span>
-            <button className="inc" onClick={() => addToCart(id)} >+</button>
+            <button className="inc" onClick={() => addToCart(id)}>+</button>
           </>
         ) : (
           <button onClick={() => addToCart(id)} className="add-to-cart-btn">
-            <img src="./img/shopping-cart-plus.png" />
+            <img src="./img/shopping-cart-plus.png" alt="Add to cart" />
             Add to Cart
           </button>
         )}
